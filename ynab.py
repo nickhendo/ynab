@@ -1,4 +1,4 @@
-from api import APIClient
+from .api import APIClient
 
 
 class TransactionNotFound(Exception):
@@ -6,11 +6,6 @@ class TransactionNotFound(Exception):
 
 
 class YNAB(APIClient):
-    def __init__(self, token=None):
-        super().__init__(token)
-        self.token = token
-        self.url_base = 'https://api.youneedabudget.com/v1'
-        self.headers = {'Content-Type': 'application/json', 'Authorization': f'Bearer {self.token}'}
 
     # User
     def get_user(self):

@@ -7,10 +7,12 @@ requests_cache.install_cache(cache_name='ynab_cache', backend='sqlite', expire_a
 
 
 class APIClient:
-    def __init__(self, token):
+    def __init__(self, token, clear_cache=False):
         self.token = token
-        self.headers = {'Authorization': f'Bearer {self.token}'}
+        self.headers = {'Content-Type': 'application/json', 'Authorization': f'Bearer {self.token}'}
         self.__url = "https://api.youneedabudget.com/v1/"
+        if clear_cache:
+            requests_cache.clear()
 
     def send_get(self, uri):
         return self.__send_request('GET', uri, data=None)
