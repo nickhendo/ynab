@@ -5,6 +5,10 @@ class TransactionNotFound(Exception):
     pass
 
 
+class CategoryNotFound(Exception):
+    pass
+
+
 class YNAB(APIClient):
 
     # User

@@ -11,7 +11,8 @@ class APIClient:
         self.token = token
         self.headers = {'Content-Type': 'application/json', 'Authorization': f'Bearer {self.token}'}
         self.__url = "https://api.youneedabudget.com/v1/"
-        if clear_cache:
+        self.clear_cache = clear_cache
+        if self.clear_cache:
             requests_cache.clear()
 
     def send_get(self, uri):
@@ -45,7 +46,8 @@ class APIClient:
             self.headers['Content-Type'] = 'application/json'
             response = requests.get(url, headers=self.headers)
         try:
-            print(f'Rate limit: {response.headers["X-Rate-Limit"]}')
+            if self.clear_cache:
+                print(f'Rate limit: {response.headers["X-Rate-Limit"]}')
         except KeyError:
             pass
         if response.status_code > 201:
