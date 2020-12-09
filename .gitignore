@@ -1,3 +1,4 @@
 ynab_cache.sqlite
+config.ini
 __pycache__/
 venv/
